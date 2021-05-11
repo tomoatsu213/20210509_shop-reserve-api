@@ -14,8 +14,6 @@ class AreasTableSeeder extends Seeder
      */
     public function run()
     {
-        Area::factory()->count(1)->forShop(['shop_id' => '1',])->create();
-        Area::factory()->count(1)->forShop(['shop_id' => '2',])->create();
-        Area::factory()->count(1)->forShop(['shop_id' => '3',])->create();
+        // $Area = Area::factory()->count(1)->forShop(['shop_id' => '1',])->create();
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Genre;
+use App\Models\Shop;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class GenreFactory extends Factory
@@ -22,7 +23,7 @@ class GenreFactory extends Factory
     public function definition()
     {
         return [
-            'shop_id' => $this->faker->randomNumber(1),
+            'shop_id' => Shop::factory(),
             'shop_genre' => $this->faker->title(),
         ];
     }

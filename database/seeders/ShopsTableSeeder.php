@@ -14,6 +14,10 @@ class ShopsTableSeeder extends Seeder
      */
     public function run()
     {
-        Shop::factory()->hasAreas(1)->hasGenres(1)->hasFavorites(1)->hasReservations(1)->create();
+        // Shop::factory()->hasAreas(1)->create();
+        // Shop::factory()->hasFavorites(1)->create();
+        // Shop::factory()->hasReservations(1)->create();
+        // Shop::factory()->hasAreas(1)->create();
+        Shop::factory(5)->hasAreas(1)->hasGenres(1)->hasFavorites(1)->hasReservations(1)->create();
     }
 }

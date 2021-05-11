@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
     use HasFactory;
-    public function shop()
+    public function shops()
     {
         return $this->belongsTo(Shop::class);
     }

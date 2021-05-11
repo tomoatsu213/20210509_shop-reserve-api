@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use ArrayObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -41,15 +42,23 @@ class ShopsController extends Controller
      */
     public function show(Shop $shop)
     {
-        $item = Shop::where('id', $shop->id)->first();
-        $areas = Shop::find('shop_id')->areas;
-        $genres = Shop::find('shop_id')->genres;
-        $items = [
-            "item" => $item,
-            "areas" => $areas,
-            "genres" => $genres,
-        ];
-        return response()->json($items, 200);
+        $items = Shop::where('id', $shop->id)->first();
+        if ($items) {
+            $areas = Shop::find($shop->id)->areas->first()->shop_area;
+            $genres = Shop::find($shop->id)->genres->first()->shop_genre;
+            $shop_area = 'shop_area';
+            $shop_genre = 'shop_genre';
+            $items -> $shop_area = $areas;
+            $items -> $shop_genre = $genres;
+            return response()->json([
+                'message' => 'OK',
+                'data' => $items
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Not found',
+            ], 404);
+        }
     }
 
     /**

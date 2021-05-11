@@ -14,8 +14,8 @@ class GenresTableSeeder extends Seeder
      */
     public function run()
     {
-        Genre::factory()->count(1)->forShop(['shop_id' => '1',])->create();
-        Genre::factory()->count(1)->forShop(['shop_id' => '2',])->create();
-        Genre::factory()->count(1)->forShop(['shop_id' => '3',])->create();
+        // Genre::factory()->count(1)->forShop(['shop_id' => '1',])->create();
+        // Genre::factory()->count(1)->forShop(['shop_id' => '2',])->create();
+        // Genre::factory()->count(1)->forShop(['shop_id' => '3',])->create();
     }
 }

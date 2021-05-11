@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Reservation;
+use App\Models\Shop;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReservationFactory extends Factory
@@ -22,8 +24,8 @@ class ReservationFactory extends Factory
     public function definition()
     {
         return [
-            'shop_id' => $this->faker->randomNumber(1),
-            'user_id' => $this->faker->randomNumber(1),
+            'shop_id' => Shop::factory(),
+            'user_id' => User::factory(),
             'reservation_date' => $this->faker->date(),
             'reservation_time' => $this->faker->dateTimeThisMonth(),
             'reservation_number' => $this->faker->randomNumber(1),

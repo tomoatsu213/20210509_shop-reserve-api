@@ -8,22 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Shop extends Model
 {
     use HasFactory;
-    public function area()
+    public function areas()
     {
         return $this->hasMany(Area::class);
     }
 
-    public function genre()
+    public function genres()
     {
         return $this->hasMany(Genre::class);
     }
 
-    public function favorite()
+    public function favorites()
     {
         return $this->hasMany(Favorite::class);
     }
 
-    public function reservation()
+    public function reservations()
     {
         return $this->hasMany(Reservation::class);
     }
