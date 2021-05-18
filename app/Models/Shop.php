@@ -27,4 +27,10 @@ class Shop extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    protected $fillable = [
+        'shop_name',
+        'shop_profile',
+        'shop_image',
+    ];
 }

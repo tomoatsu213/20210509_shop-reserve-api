@@ -17,4 +17,11 @@ class Reservation extends Model
     {
         return $this->belongsTo(Shop::class);
     }
+    protected $fillable = [
+        'shop_id',
+        'user_id',
+        'reservation_date',
+        'reservation_time',
+        'reservation_number',
+    ];
 }

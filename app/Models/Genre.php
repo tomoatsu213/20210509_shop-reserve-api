@@ -12,4 +12,9 @@ class Genre extends Model
     {
         return $this->belongsTo(Shop::class);
     }
+    
+    protected $fillable = [
+        'shop_id',
+        'shop_genre',
+    ];
 }

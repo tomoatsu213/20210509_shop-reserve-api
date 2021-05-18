@@ -15,7 +15,7 @@ class CreateAreasTable extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('shop_id')->references('id')->on('shops'); // 外部キー参照
+            $table->foreignId('shop_id')->constrained(); // 外部キー参照
             $table->string('shop_area');
             $table->timestamps();
         });

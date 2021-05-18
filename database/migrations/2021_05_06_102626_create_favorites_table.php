@@ -14,9 +14,9 @@ class CreateFavoritesTable extends Migration
     public function up()
     {
         Schema::create('favorites', function (Blueprint $table) {
-            $table->id()->unsigned();
-            $table->string('shop_id')->references('id')->on('shops'); // 外部キー参照
-            $table->string('user_id')->references('id')->on('users'); // 外部キー参照
+            $table->id();
+            $table->foreignId('shop_id')->constrained(); // 外部キー参照
+            $table->foreignId('user_id')->constrained(); // 外部キー参照
             $table->timestamps();
         });
     }
