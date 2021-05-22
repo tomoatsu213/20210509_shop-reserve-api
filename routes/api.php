@@ -20,22 +20,23 @@ use App\Http\Controllers\ShopsController;
 */
 
 Route::group(['prefix' => 'v1'], function () {
-  Route::post('registrations', [RegistrationsController::class, 'post']);
-  Route::post('login', [LoginController::class, 'post']);
-  Route::post('logout', [LogoutController::class, 'post']);
+  Route::post('registrations', [RegistrationsController::class, 'registration']);
+  Route::post('login', [LoginController::class, 'login']);
+  Route::post('logout', [LogoutController::class, 'logout']);
 
   Route::group(['prefix' => 'users'], function () {
-    Route::get('{user_id}', [UsersController::class, 'get']);
-    Route::get('{user_id}/favorites', [UsersController::class, 'get_favorites']);
-    Route::get('{user_id}/reservations', [UsersController::class, 'get_reservations']);
+    Route::get('{user_id}', [UsersController::class, 'getUser']);
+    Route::get('{user_id}/favorites', [UsersController::class, 'getUserFavorites']);
+    Route::get('{user_id}/reservations', [UsersController::class, 'getUserReservations']);
   });
 
   Route::group(['prefix' => 'shops'], function () {
-    Route::get('', [ShopsController::class, 'get']);
-    Route::get('{shop_id}', [ShopsController::class, 'show']);
-    Route::put('{shop_id}/favorites', [ShopsController::class, 'put']);
-    Route::post('{shop_id}/reservations', [ShopsController::class, 'post']);
-    // Route::post('registrations', [ShopsController::class, 'register']);
-    Route::delete('{shop_id}/reservations', [ShopsController::class, 'delete']);
+    Route::get('', [ShopsController::class, 'getShops']);
+    Route::get('{shop_id}', [ShopsController::class, 'getShop']);
+    // Route::post('registrations', [ShopsController::class, 'addShops']);
+    Route::put('{shop_id}/favorites', [ShopsController::class, 'updateFavorite']);
+    Route::delete('{shop_id}/favorites', [ShopsController::class, 'deleteFavorite']);
+    Route::post('{shop_id}/reservations', [ShopsController::class, 'addReservation']);
+    Route::delete('{shop_id}/reservations', [ShopsController::class, 'deleteReservation']);
   });
 });
