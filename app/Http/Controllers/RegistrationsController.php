@@ -10,6 +10,9 @@ class RegistrationsController extends Controller
     public function registration(Request $request)
     {
         $param = User::registration($request);
-        return $param;
+        return response()->json([
+            'message' => 'User created successfully',
+            'data' => $param
+        ], 201);
     }
 }

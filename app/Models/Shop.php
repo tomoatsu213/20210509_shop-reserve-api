@@ -37,70 +37,48 @@ class Shop extends Model
 
     public static function getShops()
     {
-        $items = Shop::with('areas', 'genres', 'favorites')->get();
-        return response()->json([
-            'message' => 'OK',
-            'data' => $items
-        ], 200);
+        $shops = Shop::with('areas', 'genres', 'favorites')->get();
+        return $shops;
     }
 
     public static function getShop($shop_id)
     {
-        $items = Shop::with('areas', 'genres', 'favorites', 'reservations')->find($shop_id);
-        return response()->json([
-            'message' => 'OK',
-            'data' => $items
-        ], 200);
+        $shop = Shop::with('areas', 'genres', 'favorites', 'reservations')->find($shop_id);
+        return $shop;
     }
 
     public static function updateFavorite(Request $request, $shop_id)
     {
-        $checkFavorite = Favorite::where('shop_id', $shop_id)->where('user_id', $request->user_id)->first();
-        if (!$checkFavorite) {
-            $param = Favorite::create([
-                "shop_id" => $shop_id,
-                "user_id" => $request->user_id,
-            ]);
-            return response()->json([
-                'message' => 'Favorite created successfully',
-                'data' => $param
-            ], 201);
-        }
+        $addFavorite = Favorite::create([
+            "shop_id" => $shop_id,
+            "user_id" => $request->user_id,
+        ]);
+        return $addFavorite;
     }
 
     public static function deleteFavorite(Request $request, $shop_id)
     {
         $checkFavorite = Favorite::where('shop_id', $shop_id)->where('user_id', $request->user_id)->first();
-        if ($checkFavorite) {
-            $param = $checkFavorite->delete();
-            return response()->json([
-                'message' => 'Favorite deleted successfully',
-                'data' => $param
-            ], 200);
-        }
+        return $checkFavorite;
     }
 
     public static function addReservation(Request $request, $shop_id)
     {
-        $param = Reservation::addReservation($request, $shop_id);
-        return response()->json([
-            'message' => 'Reservation created successfully',
-            'data' => $param,
-        ], 201);
+        $addReservation = Reservation::create([
+            "shop_id" => $shop_id,
+            "user_id" => $request->user_id,
+            "reservation_date" => $request->reservation_date,
+            "reservation_time" => $request->reservation_time,
+            "reservation_number" => $request->reservation_number,
+        ]);
+        return $addReservation;
     }
 
     public static function deleteReservation(Request $request, $shop_id)
     {
         $checkReservation = Reservation::where('shop_id', $shop_id)->where('user_id', $request->user_id)->first();
-        if ($checkReservation) {
-            $param = $checkReservation->delete();
-            return response()->json([
-                'message' => 'Reservation deleted successfully',
-                'data' => $param
-            ], 200);
-        } else {
-            return response()->json(['status' => 'not found'], 404);
-        }
+        return $checkReservation;
+
     }
 
     // public static function addShops(Request $request)
