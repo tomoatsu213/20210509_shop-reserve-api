@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reservation extends Model
+class Visit extends Model
 {
     use HasFactory;
     public function users()
@@ -21,8 +21,5 @@ class Reservation extends Model
     protected $fillable = [
         'shop_id',
         'user_id',
-        'reservation_date',
-        'reservation_time',
-        'reservation_number',
     ];
 }

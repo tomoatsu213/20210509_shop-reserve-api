@@ -1,28 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class UsersController extends Controller
 {
-    public function getUser($user_id)
+    public function getUserFavorites()
     {
-        if ($user_id) {
-            $user = User::getUser($user_id);
-            return response()->json([
-                'message' => 'User got successfully',
-                'data' => $user
-            ], 200);
-        } else {
-            return response()->json(['status' => 'unauthorized'], 401);
-        }
-    }
-
-    public function getUserFavorites($user_id)
-    {
-        if ($user_id) {
-            $userFavoriteShops = User::getUserFavorites($user_id);
+        if (Auth::user()->id) {
+            $userFavoriteShops = User::getUserFavorites(Auth::user()->id);
             return response()->json([
                 'message' => 'Favorites of user got successfully',
                 'data' => $userFavoriteShops
@@ -32,13 +19,26 @@ class UsersController extends Controller
         }
     }
 
-    public function getUserReservations($user_id)
+    public function getUserReservations()
     {
-        if ($user_id) {
-            $userFavoriteShops = User::getUserReservations($user_id);
+        if (Auth::user()->id) {
+            $userReservedShops = User::getUserReservations(Auth::user()->id);
             return response()->json([
                 'message' => 'Reservations of user got successfully',
-                'data' => $userFavoriteShops
+                'data' => $userReservedShops
+            ], 200);
+        } else {
+            return response()->json(['status' => 'unauthorized'], 401);
+        }
+    }
+
+    public function getUserVisits()
+    {
+        if (Auth::user()->id) {
+            $userReviewedShops = User::getUserVisits(Auth::user()->id);
+            return response()->json([
+                'message' => 'Reviews of user got successfully',
+                'data' => $userReviewedShops
             ], 200);
         } else {
             return response()->json(['status' => 'unauthorized'], 401);

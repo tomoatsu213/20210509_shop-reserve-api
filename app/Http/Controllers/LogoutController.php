@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+// namespace App\Http\Controllers;
 
-class LogoutController extends Controller
-{
-    public function logout()
-    {
-        return response()->json(['auth' => false], 200);
-    }
-}
+// class LogoutController extends Controller
+// {
+//     public function logout()
+//     {
+//         return response()->json(['auth' => false], 200);
+//     }
+// }
