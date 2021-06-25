@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('user_name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->tinyInteger('role')->default(1)->comment('権限');;
             $table->tinyInteger('locked_flg')->default(0);
             $table->integer('error_count')->unsigned()->default(0);
             $table->string('remember_token', 100)->nullable()->change();

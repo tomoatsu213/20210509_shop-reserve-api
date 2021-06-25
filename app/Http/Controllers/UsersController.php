@@ -6,6 +6,10 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
+
     public function getUserFavorites()
     {
         if (Auth::user()->id) {

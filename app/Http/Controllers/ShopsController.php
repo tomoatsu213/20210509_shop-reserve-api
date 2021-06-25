@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class ShopsController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
+
     public function getShops()
     {
         $shops = Shop::getShops();

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -42,6 +43,7 @@ class User extends Authenticatable implements JWTSubject
         'user_name',
         'email',
         'password',
+        'role',
         'locked_flg',
         'error_count',
         'remember_token',
@@ -55,6 +57,7 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'email',
         'password',
+        // 'role',
         'locked_flg',
         'error_count',
         'remember_token',
@@ -102,6 +105,7 @@ class User extends Authenticatable implements JWTSubject
                 'shop_area' => $userFavoriteShops[$i]->areas[0]->shop_area,
                 'shop_genre' => $userFavoriteShops[$i]->genres[0]->shop_genre,
                 'shop_star' => round($userFavoriteShops[$i]->reviews->avg('shop_star'), 2),
+                'check_favorite' => true,
             );
         }
         return $shops;
@@ -116,7 +120,7 @@ class User extends Authenticatable implements JWTSubject
             $ReservedLists = $userReservedShops[$i]->reservations->where('user_id', Auth::user()->id)->first();
             $ReservedDate = $ReservedLists->reservation_date;
             $today = date('Y-m-d');
-            if ($ReservedDate > $today) {
+            if ($ReservedDate >= $today) {
                 $shops[] = array(
                     'id' => $userReservedShops[$i]->id,
                     'shop_name' => $userReservedShops[$i]->shop_name,
